@@ -1,5 +1,3 @@
-const { async } = require('regenerator-runtime');
-
 const renderWeatherData = (data) => {
   console.log(data);
   const { name, temp } = data;
@@ -28,8 +26,8 @@ const getWeather = async (city) => {
   try {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=34519799bf724418a98113039211711&q=${city}&aqi=no`);
     response.json().then((res) => {
-      const display = processWeatherInfo(res);
-      renderWeatherData(display);
+      const data = processWeatherInfo(res);
+      renderWeatherData(data);
     });
   } catch (error) {
     console.log(error);
@@ -37,5 +35,5 @@ const getWeather = async (city) => {
 };
 
 window.onload = function () {
-  getWeather('los angeles');
+  getWeather('marseille');
 };
