@@ -1,0 +1,60 @@
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(43, 43, 43);
+  height: 100vh;
+  color: white;
+
+  main {
+    display: flex;
+    width: 1152px;
+    height: 700px;
+    outline: 1px solid white;
+    // padding: 20px;
+
+    .left {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      // outline: 1px solid white;
+      width: 65%;
+
+      nav {
+        // outline: 1px solid white;
+
+        ul {
+          list-style: none;
+          a {
+            color: white;
+          }
+        }
+      }
+
+      div {
+        // outline: 1px solid white;
+      }
+    }
+
+    .right {
+      padding: 20px 40px;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid white;
+      width: 35%;
+
+      .top {
+        // outline: 1px solid white;
+        height: 55%;
+        border-bottom: 1px solid white;
+      }
+
+      .bottom {
+        // outline: 1px solid white;
+        height: 45%;
+      }
+
+    }
+  }
+}
