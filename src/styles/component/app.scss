@@ -82,9 +82,53 @@
       width: 35%;
 
       .top {
+        display: flex;
+        flex-direction: column;
         // outline: 1px solid white;
         height: 55%;
         border-bottom: 1px solid white;
+
+        .search {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 20%;
+
+          input {
+            width: 100%;
+            height: 26px;
+            border-radius: 5px;
+            padding: 6px;
+            border: none;
+            background-color: rgb(59, 59, 59);
+            color: white;
+          }
+        }
+
+        .weather-details {
+          display: flex;
+          flex-direction: column;
+          // outline: 1px solid red;
+          flex: 1;
+
+          h3 {
+            padding-bottom: 12px;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex: 1;
+            // outline: 1px solid yellow;
+          }
+
+          p {
+            display: flex;
+            justify-content: space-between;
+            padding:  6px 0;
+          }
+        }
       }
 
       .bottom {
