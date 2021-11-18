@@ -17,6 +17,7 @@ const weatherApp = (() => {
   const app = document.querySelector('#app');
   const main = document.querySelector('main');
   const scalesBtn = document.querySelectorAll('.weather-scale > button');
+  const allDegreeValue = document.querySelectorAll('.degree');
 
   const convertForecastTempInPercent = (listOfTemp, higherTemp) => {
     const percent = [];
@@ -176,11 +177,24 @@ const weatherApp = (() => {
     return input.value;
   };
 
+  const resetScaleBtn = (btns) => {
+    btns.forEach((btn) => {
+      if (btn.textContent === 'Celsius') {
+        btn.disabled = true;
+        btn.className = '';
+      } else {
+        btn.disabled = false;
+        btn.className = 'opacity-5';
+      }
+    });
+  };
+
   const searchCity = () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const city = getSearchBarVaue();
       getWeather(city);
+      resetScaleBtn(scalesBtn);
       form.reset();
     });
   };
@@ -202,22 +216,19 @@ const weatherApp = (() => {
   };
 
   const changeScale = (scale) => {
-    console.log(scale);
-    if (scale === 'fahrenheit') {
-      const valueToConvert = displayTemp.textContent.slice(0, -1);
-      const convertValue = Math.round(convertToF(valueToConvert));
-      displayTemp.innerHTML = `${convertValue}&#176F`;
-    } else {
-      const valueToConvert = displayTemp.textContent.slice(0, -2);
-      console.log(valueToConvert);
-      const convertValue = Math.round(convertToC(valueToConvert));
-      displayTemp.innerHTML = `${convertValue}&#176`;
-    }
+    allDegreeValue.forEach((degree) => {
+      if (scale === 'fahrenheit') {
+        const valueToConvert = degree.textContent.slice(0, -1);
+        degree.innerHTML = `${Math.round(convertToF(valueToConvert))}&#176F`;
+      } else {
+        const valueToConvert = degree.textContent.slice(0, -2);
+        degree.innerHTML = `${Math.round(convertToC(valueToConvert))}&#176`;
+      }
+    });
   };
 
   const changeScaleTemperatureListener = () => {
     scalesBtn.forEach((btn) => {
-      // console.log(btn.attributes['data-scale'].value);
       btn.addEventListener('click', () => {
         changeScale(btn.attributes['data-scale'].value);
         toggleOpacityBtn(scalesBtn);

@@ -20,7 +20,7 @@
       background-size: cover;
 
       .left {
-        padding: 20px;
+        padding: 30px 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -88,16 +88,13 @@
 
       .right {
         position: relative;
-        padding: 20px 40px;
+        padding: 30px 40px;
         display: flex;
         flex-direction: column;
         flex: 1;
         background: rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(2px);
-
-
-
 
         .top {
           display: flex;
@@ -177,10 +174,10 @@
             flex-direction: column;
             justify-content: flex-end;
             padding-top: 28px;
-            height: 80%;
+            height: 90%;
 
             .wrapper-forecast-temp {
-              width: 100%;
+              width: 105%;
               align-self: center;
 
               #current {
@@ -191,13 +188,11 @@
 
                 color: black;
                 background-color: white;
-                height: 30px;
-                padding: 6px;
+                padding: 3px;
                 border-radius: 15px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 30px;
                 font-size: 18px;
               }
 
@@ -209,9 +204,8 @@
             }
 
             .forecast-visu {
-              width: 95%;
+              width: 98%;
               align-self: center;
-              padding: 0 6px;
               flex: 1;
               display: flex;
               justify-content: space-between;
@@ -238,6 +232,7 @@
 
             .wrapper-forecast-hour {
               font-size: 16px;
+              width: 105%;
               .none {
                 display: none;
               }
