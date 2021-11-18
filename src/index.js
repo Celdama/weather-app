@@ -13,6 +13,7 @@ const weatherApp = (() => {
   const forecastBar = document.querySelectorAll('.prev');
   const displayForecastTemp = document.querySelectorAll('.forecast-temp');
   const displayForecastHour = document.querySelectorAll('.forecast-hour');
+  const form = document.querySelector('form');
 
   const convertForecastTempInPercent = (listOfTemp, higherTemp) => {
     const percent = [];
@@ -125,13 +126,12 @@ const weatherApp = (() => {
     };
   };
 
-  const getWeather = async (city) => {
+  const getWeather = async (city = 'Barcelona') => {
     const key = '34519799bf724418a98113039211711';
 
     try {
       const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
       response.json().then((res) => {
-        console.log(res);
         const { currentDayData, forecastDayDataWithHour } = processWeatherInfo(res);
         renderWeatherData(currentDayData, forecastDayDataWithHour);
       });
@@ -140,11 +140,27 @@ const weatherApp = (() => {
     }
   };
 
+  const getSearchBarVaue = () => {
+    const input = document.querySelector('input');
+    return input.value;
+  };
+
+  const searchCity = () => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const city = getSearchBarVaue();
+      getWeather(city);
+      form.reset();
+    });
+  };
+
   return {
     getWeather,
+    searchCity,
   };
 })();
 
 window.onload = () => {
-  weatherApp.getWeather('malmo');
+  weatherApp.getWeather();
+  weatherApp.searchCity();
 };
