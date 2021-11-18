@@ -19,16 +19,15 @@
           </nav>
           <div class="weather-resume">
             <div class="weather-deg">
-              <p>12&#176;</p>
             </div>
             <div class="weather-info">
               <p class="localisation"></p>
               <p class="date"></p>
               <p class="weather"></p>
             </div>
-            <div class="weather-measure">
-              <button>Celsius</button><span>|</span>
-              <button>Fahrenheit</button>
+            <div class="weather-scale">
+              <button id="celsius-btn" disabled data-scale='celsius'>Celsius</button><span>|</span>
+              <button id="fahrenheit-btn" class="opacity-5" data-scale="fahrenheit">Fahrenheit</button>
             </div>
           </div>
         </div>
@@ -36,7 +35,7 @@
           <div class="top">
             <form class="search" action="#">
               <span>
-                <input type="search" name="#" id="#" placeholder="Location" />
+                <input type="search" autocomplete="off" name="#" id="#" placeholder="Location" />
                 <button type="submit" class="search-btn">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,34 +68,34 @@
               <div class="wrapper-forecast-temp">
                 <ul>
                   <li id="current" class="current-temp forecast-temp">15</li>
-                  <li class="forecast-temp opacity-7"></li>
-                  <li class="forecast-temp opacity-7"></li>
-                  <li class="forecast-temp opacity-7"></li>
-                  <li class="forecast-temp opacity-7"></li>
-                  <li class="forecast-temp opacity-7"></li>
-                  <li class="forecast-temp opacity-7"></li>
+                  <li class="forecast-temp opacity-5"></li>
+                  <li class="forecast-temp opacity-5"></li>
+                  <li class="forecast-temp opacity-5"></li>
+                  <li class="forecast-temp opacity-5"></li>
+                  <li class="forecast-temp opacity-5"></li>
+                  <li class="forecast-temp opacity-5"></li>
                 </ul>
               </div>
               <div class="forecast-visu">
                 <div class="vl">
                   <div class="current prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
-                <div class="vl opacity-7">
+                <div class="vl opacity-5">
                   <div class="prev"></div>
                 </div>
               </div>
@@ -104,11 +103,11 @@
                 <ul>
                   <li class="current-hour forecast-hour"></li>
                   <li class="forecast-hour none"></li>
-                  <li class="forecast-hour opacity-7"></li>
+                  <li class="forecast-hour opacity-5"></li>
                   <li class="forecast-hour none"></li>
-                  <li class="forecast-hour opacity-7"></li>
+                  <li class="forecast-hour opacity-5"></li>
                   <li class="forecast-hour none"></li>
-                  <li class="forecast-hour opacity-7"></li>
+                  <li class="forecast-hour opacity-5"></li>
                 </ul>
               </div>
             </div>

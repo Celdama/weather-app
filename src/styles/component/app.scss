@@ -61,7 +61,7 @@
 
           }
 
-          .weather-measure {
+          .weather-scale {
             display: flex;
             align-items: flex-end;
             padding-bottom: 12px;
@@ -70,6 +70,13 @@
               border: none;
               background: none;
               color: white;
+
+              &:hover {
+                cursor: pointer;
+              }
+            }
+            .opacity-5 {
+              opacity: 0.5;
             }
 
             span {
@@ -243,8 +250,8 @@
               justify-content: space-between;
             }
 
-            .opacity-7 {
-              opacity: 0.6;
+            .opacity-5 {
+              opacity: 0.5;
             }
           }
         }

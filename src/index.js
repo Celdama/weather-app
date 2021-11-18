@@ -16,6 +16,7 @@ const weatherApp = (() => {
   const form = document.querySelector('form');
   const app = document.querySelector('#app');
   const main = document.querySelector('main');
+  const scalesBtn = document.querySelectorAll('.weather-scale > button');
 
   const convertForecastTempInPercent = (listOfTemp, higherTemp) => {
     const percent = [];
@@ -184,13 +185,55 @@ const weatherApp = (() => {
     });
   };
 
+  const convertToF = (celsius) => (celsius * 1.8) + 32;
+
+  const convertToC = (fahrenheit) => (fahrenheit - 32) / 1.8;
+
+  const toggleOpacityBtn = (btns) => {
+    btns.forEach((btn) => {
+      if (btn.classList.contains('opacity-5')) {
+        btn.classList.remove('opacity-5');
+        btn.disabled = true;
+      } else {
+        btn.classList.add('opacity-5');
+        btn.disabled = false;
+      }
+    });
+  };
+
+  const changeScale = (scale) => {
+    console.log(scale);
+    if (scale === 'fahrenheit') {
+      const valueToConvert = displayTemp.textContent.slice(0, -1);
+      const convertValue = Math.round(convertToF(valueToConvert));
+      displayTemp.innerHTML = `${convertValue}&#176F`;
+    } else {
+      const valueToConvert = displayTemp.textContent.slice(0, -2);
+      console.log(valueToConvert);
+      const convertValue = Math.round(convertToC(valueToConvert));
+      displayTemp.innerHTML = `${convertValue}&#176`;
+    }
+  };
+
+  const changeScaleTemperatureListener = () => {
+    scalesBtn.forEach((btn) => {
+      // console.log(btn.attributes['data-scale'].value);
+      btn.addEventListener('click', () => {
+        changeScale(btn.attributes['data-scale'].value);
+        toggleOpacityBtn(scalesBtn);
+      });
+    });
+  };
+
   return {
     getWeather,
     searchCity,
+    changeScaleTemperatureListener,
   };
 })();
 
 window.onload = () => {
   weatherApp.getWeather();
   weatherApp.searchCity();
+  weatherApp.changeScaleTemperatureListener();
 };
