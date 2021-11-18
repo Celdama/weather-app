@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
-  <link rel="stylesheet" href="main.scss">
-  <script src="index.js" defer></script>
-</head>
-<body>
-  <div id="app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="main.scss" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
       <main>
         <div class="left">
           <nav>
@@ -35,7 +35,7 @@
         <div class="right">
           <div class="top">
             <div class="search">
-              <input type="search" name="#" id="#" placeholder="Location">
+              <input type="search" name="#" id="#" placeholder="Location" />
             </div>
             <div class="weather-details">
               <h3>Weather Details</h3>
@@ -50,53 +50,47 @@
           <div class="bottom">
             <h3>Temperature</h3>
             <div class="wrapper-forecast">
-              <div class="forecast-temp">
+              <div class="wrapper-forecast-temp">
                 <ul>
-                  <li>15</li>
-                  <li>15</li>
-                  <li>15</li>
-                  <li>15</li>
-                  <li>15</li>
-                  <li>15</li>
-                  <li>15</li>
+                  <li class="current-temp">15</li>
+                  <li class="forecast-temp">15</li>
+                  <li class="forecast-temp">15</li>
+                  <li class="forecast-temp">15</li>
+                  <li class="forecast-temp">15</li>
+                  <li class="forecast-temp">15</li>
+                  <li class="forecast-temp">15</li>
                 </ul>
               </div>
               <div class="forecast-visu">
                 <div class="vl">
-                  <div class="prev" per="60%"></div>
-
+                  <div class="current"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="60%"></div>
-
+                  <div class="prev"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="50%"></div>
+                  <div class="prev"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="70%"></div>
-
+                  <div class="prev"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="10%"></div>
-
+                  <div class="prev"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="20%"></div>
-
+                  <div class="prev"></div>
                 </div>
                 <div class="vl">
-                  <div class="prev" per="50%"></div>
-
+                  <div class="prev"></div>
                 </div>
               </div>
               <div class="forecast-hour">
                 <ul>
-                  <li>1PM</li>
+                  <li class="current-hour"></li>
                   <li></li>
                   <li>1PM</li>
                   <li></li>
-                  <li>1PM</li>
+                  <li >4PM</li>
                   <li></li>
                   <li>1PM</li>
                 </ul>
@@ -105,6 +99,6 @@
           </div>
         </div>
       </main>
-  </div>
-</body>
+    </div>
+  </body>
 </html>

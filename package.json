@@ -29,6 +29,7 @@
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
+    "date-fns": "^2.25.0",
     "regenerator-runtime": "^0.13.9"
   }
 }

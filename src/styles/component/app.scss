@@ -88,8 +88,8 @@
         flex-direction: column;
         flex: 1;
         background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(2px);
 
 
 
@@ -112,8 +112,12 @@
               border-radius: 5px;
               padding: 6px;
               border: none;
-              background-color: rgb(59, 59, 59);
+              background-color: rgb(105, 105, 105);
               color: white;
+
+              &::placeholder {
+                color: white;
+              }
             }
           }
 
@@ -152,7 +156,7 @@
             padding-top: 28px;
             height: 80%;
 
-            .forecast-temp {
+            .wrapper-forecast-temp {
             }
 
             .forecast-visu {
@@ -168,9 +172,10 @@
                 width: 1px;
                 background-color: rgba(185, 185, 185, 0.4);
 
-                .prev {
+
+                .prev, .current {
                   background-color: white;
-                  height: 50%;
+                  // height: 50%;
                   width: 3px;
                   position: absolute;
                   left: -1px;
@@ -178,8 +183,6 @@
                   border-radius: 3px;
                 }
               }
-
-
             }
 
 
