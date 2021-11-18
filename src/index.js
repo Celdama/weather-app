@@ -1,3 +1,4 @@
+import format from 'date-fns/format';
 import getHours from 'date-fns/getHours';
 
 const weatherApp = (() => {
@@ -10,23 +11,45 @@ const weatherApp = (() => {
   const displayWind = document.querySelector('.wind-info');
   const displayRain = document.querySelector('.rain-info');
   const forecastBar = document.querySelectorAll('.prev');
-  const currentBar = document.querySelector('.current');
-  const displayCurrentHour = document.querySelector('.current-hour');
-  const displayCurrentTemp = document.querySelector('.current-temp');
   const displayForecastTemp = document.querySelectorAll('.forecast-temp');
+  const displayForecastHour = document.querySelectorAll('.forecast-hour');
 
   const convertForecastTempInPercent = (listOfTemp, higherTemp) => {
     const percent = [];
 
     listOfTemp.forEach((temp) => {
-      percent.push((temp * 100) / higherTemp);
+      const temperature = temp.temp_c;
+      percent.push((temperature * 100) / higherTemp);
     });
 
     return percent;
   };
 
-  const renderForecastData = (data, currentTime, currentTemp) => {
-    const higherDayTemp = data.reduce((p, v) => (p > v ? p : v));
+  const renderForecastHour = (hour) => {
+    displayForecastHour.forEach((li, i) => {
+      li.textContent = hour[i];
+    });
+  };
+
+  const getForecastTimeConvert = (listOfTime) => {
+    const forecastTime = [];
+
+    listOfTime.forEach((item) => {
+      const dateConvert = format(new Date(item.time), 'haa');
+      forecastTime.push(dateConvert);
+    });
+
+    return forecastTime;
+  };
+
+  const renderForecastData = (data, currentTime) => {
+    const allTempOfThisDay = [];
+
+    data.forEach((item) => {
+      allTempOfThisDay.push(item.temp_c);
+    });
+
+    const higherDayTemp = allTempOfThisDay.reduce((p, v) => (p > v ? p : v));
     let currentHour = getHours(new Date(currentTime));
     const forecastTempForNext6Hours = [];
 
@@ -45,23 +68,18 @@ const weatherApp = (() => {
       }
     });
 
-    displayCurrentHour.textContent = currentHour > 12
-      ? `${currentHour}PM` : `${currentHour}AM`;
-
-    displayCurrentTemp.innerHTML = `${Math.round(currentTemp)}&#176`;
-
-    console.log(currentBar);
-    currentBar.style.height = `${(currentTemp * 100) / higherDayTemp}%`;
-    // console.log((currentTemp * 100) / higherDayTemp);
-
     const percentValue = convertForecastTempInPercent(forecastTempForNext6Hours, higherDayTemp);
+    const timeValue = getForecastTimeConvert(forecastTempForNext6Hours);
+
+    renderForecastHour(timeValue);
 
     forecastBar.forEach((bar, i) => {
       bar.style.height = `${percentValue[i]}%`;
     });
 
     displayForecastTemp.forEach((temp, i) => {
-      temp.innerHTML = `${Math.round(forecastTempForNext6Hours[i])}&#176`;
+      const tempToDisplay = `${Math.round(forecastTempForNext6Hours[i].temp_c)}&#176`;
+      temp.innerHTML = `${tempToDisplay}`;
     });
   };
 
@@ -70,8 +88,6 @@ const weatherApp = (() => {
       name, tempC, localtime, text, cloud, humidity,
       wind, precip, tempF,
     } = currentData;
-
-    // console.log(currentData);
 
     displayLocalisation.textContent = name;
     displayTemp.innerHTML = `${tempC}&#176`;
@@ -101,16 +117,11 @@ const weatherApp = (() => {
       tempF: current.temp_f,
     };
 
-    const forecastDayData = [];
-    const hours = info.forecast.forecastday[0].hour;
-
-    hours.forEach((hour) => {
-      forecastDayData.push(hour.temp_c);
-    });
+    const forecastDayDataWithHour = info.forecast.forecastday[0].hour;
 
     return {
       currentDayData,
-      forecastDayData,
+      forecastDayDataWithHour,
     };
   };
 
@@ -121,8 +132,8 @@ const weatherApp = (() => {
       const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
       response.json().then((res) => {
         console.log(res);
-        const { currentDayData, forecastDayData } = processWeatherInfo(res);
-        renderWeatherData(currentDayData, forecastDayData);
+        const { currentDayData, forecastDayDataWithHour } = processWeatherInfo(res);
+        renderWeatherData(currentDayData, forecastDayDataWithHour);
       });
     } catch (error) {
       console.log(error);
@@ -135,5 +146,5 @@ const weatherApp = (() => {
 })();
 
 window.onload = () => {
-  weatherApp.getWeather('paris');
+  weatherApp.getWeather('malmo');
 };

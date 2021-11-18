@@ -157,13 +157,42 @@
             height: 80%;
 
             .wrapper-forecast-temp {
+              width: 100%;
+              align-self: center;
+
+              #current {
+                opacity: 1;
+              }
+
+              .current-temp {
+
+                color: black;
+                background-color: white;
+                height: 30px;
+                padding: 6px;
+                border-radius: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                font-size: 18px;
+              }
+
+              ul {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
             }
 
             .forecast-visu {
+              width: 95%;
+              align-self: center;
               padding: 0 6px;
               flex: 1;
               display: flex;
               justify-content: space-between;
+
               align-items: center;
 
               .vl {
@@ -175,8 +204,7 @@
 
                 .prev, .current {
                   background-color: white;
-                  // height: 50%;
-                  width: 3px;
+                  width: 4px;
                   position: absolute;
                   left: -1px;
                   bottom: 0;
@@ -185,12 +213,22 @@
               }
             }
 
+            .wrapper-forecast-hour {
+              font-size: 16px;
+              .none {
+                display: none;
+              }
+            }
 
 
             ul {
               display: flex;
               list-style: none;
               justify-content: space-between;
+            }
+
+            .opacity-7 {
+              opacity: 0.6;
             }
           }
         }
