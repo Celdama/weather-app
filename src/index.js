@@ -1,39 +1,79 @@
-const renderWeatherData = (data) => {
-  console.log(data);
-  const { name, temp } = data;
-
+const weatherApp = (() => {
   const displayLocalisation = document.querySelector('.localisation');
   const displayTemp = document.querySelector('.weather-deg');
+  const displayLocalTime = document.querySelector('.date');
+  const displayWeatherResume = document.querySelector('.weather');
+  const displayCloudly = document.querySelector('.cloudly-info');
+  const displayHumidity = document.querySelector('.humidity-info');
+  const displayWind = document.querySelector('.wind-info');
+  const displayRain = document.querySelector('.rain-info');
 
-  displayLocalisation.textContent = name;
-  displayTemp.innerHTML = `${temp}&#176`;
-};
+  const renderWeatherData = (currentData, forecastData) => {
+    console.log(forecastData);
 
-const processWeatherInfo = (info) => {
-  const { name, country } = info.location;
-  const { temp_c } = info.current;
+    const {
+      name, tempC, localtime, text, cloud, humidity,
+      wind, precip, tempF,
+    } = currentData;
 
-  const requiredInfo = {
-    name,
-    country,
-    temp: temp_c,
+    displayLocalisation.textContent = name;
+    displayTemp.innerHTML = `${tempC}&#176`;
+    displayLocalTime.textContent = localtime;
+    displayWeatherResume.textContent = text;
+    displayCloudly.innerHTML = `${cloud}%`;
+    displayHumidity.innerHTML = `${humidity}%`;
+    displayWind.innerHTML = `${wind}km/h`;
+    displayRain.innerHTML = `${precip}mm`;
   };
 
-  return requiredInfo;
-};
+  const processWeatherInfo = (info) => {
+    const { location, current } = info;
 
-const getWeather = async (city) => {
-  try {
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=34519799bf724418a98113039211711&q=${city}&aqi=no`);
-    response.json().then((res) => {
-      const data = processWeatherInfo(res);
-      renderWeatherData(data);
+    const currentDayData = {
+      name: location.name,
+      country: location.country,
+      localtime: location.localtime,
+      text: current.condition,
+      cloud: current.cloud,
+      humidity: current.humidity,
+      wind: current.wind_kph,
+      precip: current.precip_mm,
+      tempC: current.temp_c,
+      tempF: current.temp_f,
+    };
+
+    const forecastDayData = [];
+    const hours = info.forecast.forecastday[0].hour;
+
+    hours.forEach((hour) => {
+      forecastDayData.push(hour.temp_c);
     });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-window.onload = function () {
-  getWeather('marseille');
+    return {
+      currentDayData,
+      forecastDayData,
+    };
+  };
+
+  const getWeather = async (city) => {
+    const key = '34519799bf724418a98113039211711';
+
+    try {
+      const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
+      response.json().then((res) => {
+        const { currentDayData, forecastDayData } = processWeatherInfo(res);
+        renderWeatherData(currentDayData, forecastDayData);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    getWeather,
+  };
+})();
+
+window.onload = () => {
+  weatherApp.getWeather('new york');
 };
