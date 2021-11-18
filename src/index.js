@@ -16,6 +16,8 @@ const weatherApp = (() => {
       wind, precip, tempF,
     } = currentData;
 
+    // console.log(currentData);
+
     displayLocalisation.textContent = name;
     displayTemp.innerHTML = `${tempC}&#176`;
     displayLocalTime.textContent = localtime;
@@ -33,7 +35,7 @@ const weatherApp = (() => {
       name: location.name,
       country: location.country,
       localtime: location.localtime,
-      text: current.condition,
+      text: current.condition.text,
       cloud: current.cloud,
       humidity: current.humidity,
       wind: current.wind_kph,
@@ -75,5 +77,5 @@ const weatherApp = (() => {
 })();
 
 window.onload = () => {
-  weatherApp.getWeather('new york');
+  // weatherApp.getWeather('new york');
 };

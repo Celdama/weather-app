@@ -143,6 +143,53 @@
 
         .bottom {
           height: 45%;
+          padding-top: 20px;
+
+          .wrapper-forecast {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-top: 28px;
+            height: 80%;
+
+            .forecast-temp {
+            }
+
+            .forecast-visu {
+              padding: 0 6px;
+              flex: 1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              .vl {
+                position: relative;
+                height: 90%;
+                width: 1px;
+                background-color: rgba(185, 185, 185, 0.4);
+
+                .prev {
+                  background-color: white;
+                  height: 50%;
+                  width: 3px;
+                  position: absolute;
+                  left: -1px;
+                  bottom: 0;
+                  border-radius: 3px;
+                }
+              }
+
+
+            }
+
+
+
+            ul {
+              display: flex;
+              list-style: none;
+              justify-content: space-between;
+            }
+          }
         }
 
       }
