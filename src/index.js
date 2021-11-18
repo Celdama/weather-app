@@ -119,9 +119,11 @@ const weatherApp = (() => {
       wind, precip, tempF, code,
     } = currentData;
 
+    console.log();
+
     displayLocalisation.textContent = name;
     displayTemp.innerHTML = `${tempC}&#176`;
-    displayLocalTime.textContent = localtime;
+    displayLocalTime.textContent = `${format(new Date(localtime), 'EEEE h:mm aa')}`;
     displayWeatherResume.textContent = text;
     displayCloudly.innerHTML = `${cloud}%`;
     displayHumidity.innerHTML = `${humidity}%`;
