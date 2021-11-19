@@ -1,0 +1,37 @@
+.search {
+  span {
+    padding-bottom: 22px;
+    border-radius: 5px;
+    display: flex;
+    input {
+      width: 100%;
+      height: 36px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      padding: 6px;
+      border: none;
+      background-color: rgb(105, 105, 105);
+      color: white;
+
+      &::placeholder {
+        color: white;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+    .search-btn {
+      border: none;
+      padding: 9px;
+      color: rgb(255, 255, 255, 0.6);
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background-color: rgb(105, 105, 105);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

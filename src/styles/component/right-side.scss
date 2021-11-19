@@ -1,0 +1,22 @@
+.right {
+  position: relative;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(2px);
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    height: 55%;
+    border-bottom: 1px solid white;
+  }
+
+  .bottom {
+    height: 45%;
+    padding-top: 20px;
+  }
+}
