@@ -4,9 +4,8 @@
   flex: 1;
   position: relative;
   padding: 3em 4em;
-  background: $color-black-default;
-  opacity: $opacity-md;
-  backdrop-filter: blur(4px);
+  background: rgba($color-black-default, $alpha: .7);
+  backdrop-filter: blur(3px);
 
   .top {
     display: flex;
