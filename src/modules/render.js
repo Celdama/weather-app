@@ -21,7 +21,7 @@ const renderModule = (() => {
   };
 
   const renderForecastData = (data, currentTime) => {
-    const { convertForecastTempInPercent, getForecastTimeConvert } = convertModule;
+    const { convertForecastTempInPercent, getForecastHourConvert } = convertModule;
     const allTempOfThisDay = [];
 
     data.forEach((item) => {
@@ -48,7 +48,7 @@ const renderModule = (() => {
     });
 
     const percentValue = convertForecastTempInPercent(forecastTempForNext6Hours, higherDayTemp);
-    const timeValue = getForecastTimeConvert(forecastTempForNext6Hours);
+    const timeValue = getForecastHourConvert(forecastTempForNext6Hours);
 
     forecastBar.forEach((bar, i) => {
       bar.style.height = `${percentValue[i]}%`;

@@ -6,32 +6,33 @@ const convertModule = (() => {
   const convertToC = (fahrenheit) => (fahrenheit - 32) / 1.8;
 
   const convertForecastTempInPercent = (listOfTemp, higherTemp) => {
-    const percent = [];
+    const percentValueComparedWithHigherTemp = [];
 
     listOfTemp.forEach((temp) => {
       const temperature = temp.temp_c;
-      percent.push((temperature * 100) / higherTemp);
+      percentValueComparedWithHigherTemp.push((temperature * 100) / higherTemp);
     });
 
-    return percent;
+    return percentValueComparedWithHigherTemp;
   };
 
-  const getForecastTimeConvert = (listOfTime) => {
-    const forecastTime = [];
+  const getForecastHourConvert = (listOfHour) => {
+    const forecastHourAMPMFormat = [];
 
-    listOfTime.forEach((item) => {
-      const dateConvert = format(new Date(item.time), 'haa');
-      forecastTime.push(dateConvert);
+    listOfHour.forEach((item) => {
+      const { time } = item;
+      const dateConvert = format(new Date(time), 'haa');
+      forecastHourAMPMFormat.push(dateConvert);
     });
 
-    return forecastTime;
+    return forecastHourAMPMFormat;
   };
 
   return {
     convertToF,
     convertToC,
     convertForecastTempInPercent,
-    getForecastTimeConvert,
+    getForecastHourConvert,
   };
 })();
 
