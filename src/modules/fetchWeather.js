@@ -32,8 +32,7 @@ const fetchModule = (() => {
   };
 
   const getWeather = async (city = 'Barcelona') => {
-    const { changeBackgroundImage } = backgroundModule;
-    const { renderForecastHour, renderForecastData, renderWeatherData } = renderModule;
+    const { renderWeatherData } = renderModule;
     // never keep api key on the frontend, but for the moment I don't have a backend
     const key = '34519799bf724418a98113039211711';
 
@@ -41,10 +40,7 @@ const fetchModule = (() => {
       const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
       response.json().then((res) => {
         const { currentData, forecastData } = processWeatherInfo(res);
-        const { weatherCode, localtime } = renderWeatherData(currentData, forecastData);
-        const { timeValue } = renderForecastData(forecastData, localtime);
-        renderForecastHour(timeValue);
-        changeBackgroundImage(weatherCode);
+        renderWeatherData(currentData, forecastData);
       });
     } catch (error) {
       throw new Error('error in getWeather function', error);

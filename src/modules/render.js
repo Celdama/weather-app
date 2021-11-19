@@ -1,5 +1,6 @@
 import { format, getHours } from 'date-fns';
 import convertModule from './convert';
+import backgroundModule from './background';
 
 const renderModule = (() => {
   const displayLocalisation = document.querySelector('.localisation');
@@ -11,64 +12,77 @@ const renderModule = (() => {
   const displayWind = document.querySelector('.wind-info');
   const displayRain = document.querySelector('.rain-info');
   const displayForecastHour = document.querySelectorAll('.forecast-hour');
-  const forecastBar = document.querySelectorAll('.prev');
+  const forecastCandle = document.querySelectorAll('.prev');
   const displayForecastTemp = document.querySelectorAll('.forecast-temp');
 
   const renderForecastHour = (hour) => {
     displayForecastHour.forEach((li, i) => {
-      li.textContent = hour[i];
+      const liToDisplayHour = li;
+      liToDisplayHour.textContent = hour[i];
+    });
+  };
+
+  const getHigherTempOfCurrentDay = (allTemp) => {
+    const allTempOfCurrentDay = [];
+
+    allTemp.forEach((item) => {
+      const { temp_c: tempC } = item;
+      allTempOfCurrentDay.push(tempC);
+    });
+
+    const higherValue = allTempOfCurrentDay.reduce((p, v) => (p > v ? p : v));
+
+    return higherValue;
+  };
+
+  const getForecastDataForNext6Hours = (allForecastData, time) => {
+    const forecastTempForNext6Hours = [];
+    const currentHour = getHours(new Date(time));
+
+    for (let i = currentHour; i < currentHour + 7; i += 1) {
+      forecastTempForNext6Hours.push(allForecastData[i]);
+    }
+
+    return forecastTempForNext6Hours;
+  };
+
+  const renderPercentValue = (values) => {
+    forecastCandle.forEach((candle, i) => {
+      const candleBody = candle;
+      candleBody.style.height = `${values[i]}%`;
+    });
+  };
+
+  const renderForecastTemp = (nextTemp) => {
+    displayForecastTemp.forEach((li, i) => {
+      const temp = li;
+      const { temp_c: tempC } = nextTemp[i];
+      const tempToDisplay = `${Math.round(tempC)}&#176`;
+      temp.innerHTML = `${tempToDisplay}`;
     });
   };
 
   const renderForecastData = (data, currentTime) => {
     const { convertForecastTempInPercent, getForecastHourConvert } = convertModule;
-    const allTempOfThisDay = [];
 
-    data.forEach((item) => {
-      allTempOfThisDay.push(item.temp_c);
-    });
+    const higherTemp = getHigherTempOfCurrentDay(data);
+    const next6hoursData = getForecastDataForNext6Hours(data, currentTime);
 
-    const higherDayTemp = allTempOfThisDay.reduce((p, v) => (p > v ? p : v));
-    let currentHour = getHours(new Date(currentTime));
-    const forecastTempForNext6Hours = [];
-
-    data.forEach((temp, i) => {
-      let dataPush = i;
-
-      if (dataPush < 7) {
-        forecastTempForNext6Hours.push(data[currentHour]);
-      }
-
-      dataPush += 1;
-
-      currentHour += 1;
-      if (currentHour > 23) {
-        currentHour = 0;
-      }
-    });
-
-    const percentValue = convertForecastTempInPercent(forecastTempForNext6Hours, higherDayTemp);
-    const timeValue = getForecastHourConvert(forecastTempForNext6Hours);
-
-    forecastBar.forEach((bar, i) => {
-      bar.style.height = `${percentValue[i]}%`;
-    });
-
-    displayForecastTemp.forEach((temp, i) => {
-      const tempToDisplay = `${Math.round(forecastTempForNext6Hours[i].temp_c)}&#176`;
-      temp.innerHTML = `${tempToDisplay}`;
-    });
-
-    return {
-      timeValue,
-    };
+    renderPercentValue(convertForecastTempInPercent(next6hoursData, higherTemp));
+    renderForecastTemp(next6hoursData);
+    renderForecastHour(getForecastHourConvert(next6hoursData));
   };
 
-  const renderWeatherData = (currentData) => {
+  const renderWeatherData = (currentData, forecastData) => {
+    const { changeBackgroundImage } = backgroundModule;
+
     const {
       name, tempC, localtime, text, cloud, humidity,
       wind, precip, code: weatherCode,
     } = currentData;
+
+    changeBackgroundImage(weatherCode);
+    renderForecastData(forecastData, localtime);
 
     displayLocalisation.textContent = name;
     displayTemp.innerHTML = `${tempC}&#176`;
@@ -78,17 +92,10 @@ const renderModule = (() => {
     displayHumidity.innerHTML = `${humidity}%`;
     displayWind.innerHTML = `${wind}km/h`;
     displayRain.innerHTML = `${precip}mm`;
-
-    return {
-      weatherCode,
-      localtime,
-    };
   };
 
   return {
     renderWeatherData,
-    renderForecastHour,
-    renderForecastData,
   };
 })();
 
