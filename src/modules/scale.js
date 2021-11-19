@@ -6,12 +6,13 @@ const scaleModule = (() => {
 
   const toggleOpacityBtn = (btns) => {
     btns.forEach((btn) => {
+      const scaleBtn = btn;
       if (btn.classList.contains('opacity-5')) {
-        btn.classList.remove('opacity-5');
-        btn.disabled = true;
+        scaleBtn.classList.remove('opacity-5');
+        scaleBtn.disabled = true;
       } else {
-        btn.classList.add('opacity-5');
-        btn.disabled = false;
+        scaleBtn.classList.add('opacity-5');
+        scaleBtn.disabled = false;
       }
     });
   };
@@ -20,12 +21,13 @@ const scaleModule = (() => {
     const { convertToF, convertToC } = convertModule;
 
     allDegreeValue.forEach((degree) => {
+      const displayDegree = degree;
       if (scale === 'fahrenheit') {
         const valueToConvert = degree.textContent.slice(0, -1);
-        degree.innerHTML = `${Math.round(convertToF(valueToConvert))}&#176F`;
+        displayDegree.innerHTML = `${Math.round(convertToF(valueToConvert))}&#176F`;
       } else {
         const valueToConvert = degree.textContent.slice(0, -2);
-        degree.innerHTML = `${Math.round(convertToC(valueToConvert))}&#176`;
+        displayDegree.innerHTML = `${Math.round(convertToC(valueToConvert))}&#176`;
       }
     });
   };
@@ -33,7 +35,8 @@ const scaleModule = (() => {
   const changeScaleTemperatureListener = () => {
     scalesBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        changeScale(btn.attributes['data-scale'].value);
+        const { value } = btn.attributes['data-scale'];
+        changeScale(value);
         toggleOpacityBtn(scalesBtns);
       });
     });
