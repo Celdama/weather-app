@@ -9,21 +9,22 @@ const searchModule = (() => {
 
   const resetScaleBtn = (btns) => {
     btns.forEach((btn) => {
+      const resetBtn = btn;
       if (btn.textContent === 'Celsius') {
-        btn.disabled = true;
-        btn.className = '';
+        resetBtn.disabled = true;
+        resetBtn.className = '';
       } else {
-        btn.disabled = false;
-        btn.className = 'opacity-5';
+        resetBtn.disabled = false;
+        resetBtn.className = 'opacity-5';
       }
     });
   };
 
   const searchCity = () => {
+    const { getWeather } = fetchModule;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const city = getSearchBarValue();
-      fetchModule.getWeather(city);
+      getWeather(getSearchBarValue());
       resetScaleBtn(scalesBtn);
       form.reset();
     });
