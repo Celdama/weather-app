@@ -37,7 +37,7 @@ const fetchModule = (() => {
     const key = '34519799bf724418a98113039211711';
 
     try {
-      const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
+      const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
       response.json().then((res) => {
         const { currentData, forecastData } = processWeatherInfo(res);
         renderWeatherData(currentData, forecastData);
