@@ -8,8 +8,14 @@ const fetchModule = (() => {
     const { name, localtime } = location;
     const { text, code } = current.condition;
     const {
-      cloud, humidity, wind_kph: wind, precip_mm: precip, temp_c: tempC,
+      cloud,
+      humidity,
+      wind_kph: wind,
+      precip_mm: precip,
+      temp_c,
     } = current;
+
+    // console.log(current);
 
     const currentData = {
       name,
@@ -19,9 +25,11 @@ const fetchModule = (() => {
       humidity,
       wind,
       precip,
-      tempC,
+      tempC: temp_c,
       code,
     };
+
+    // console.log(currentData);
 
     const forecastData = hour;
 
@@ -37,7 +45,9 @@ const fetchModule = (() => {
     const key = '34519799bf724418a98113039211711';
 
     try {
-      const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`);
+      const response = await fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&days=1&aqi=no&alerts=no`
+      );
       response.json().then((res) => {
         const { currentData, forecastData } = processWeatherInfo(res);
         renderWeatherData(currentData, forecastData);

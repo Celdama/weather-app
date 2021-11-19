@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
 const convertModule = (() => {
-  const convertToF = (celsius) => (celsius * 1.8) + 32;
+  const convertToF = (celsius) => celsius * 1.8 + 32;
 
   const convertToC = (fahrenheit) => (fahrenheit - 32) / 1.8;
 

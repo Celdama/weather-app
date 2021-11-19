@@ -39,8 +39,14 @@ const renderModule = (() => {
     const forecastTempForNext6Hours = [];
     const currentHour = getHours(new Date(time));
 
-    for (let i = currentHour; i < currentHour + 7; i += 1) {
+    let iterator = 0;
+
+    for (let i = currentHour; iterator < 7; i += 1) {
+      if (i > 23) {
+        i = 0;
+      }
       forecastTempForNext6Hours.push(allForecastData[i]);
+      iterator += 1;
     }
 
     return forecastTempForNext6Hours;
@@ -63,12 +69,15 @@ const renderModule = (() => {
   };
 
   const renderForecastData = (data, currentTime) => {
-    const { convertForecastTempInPercent, getForecastHourConvert } = convertModule;
+    const { convertForecastTempInPercent, getForecastHourConvert } =
+      convertModule;
 
     const higherTemp = getHigherTempOfCurrentDay(data);
     const next6hoursData = getForecastDataForNext6Hours(data, currentTime);
 
-    renderPercentValue(convertForecastTempInPercent(next6hoursData, higherTemp));
+    renderPercentValue(
+      convertForecastTempInPercent(next6hoursData, higherTemp)
+    );
     renderForecastTemp(next6hoursData);
     renderForecastHour(getForecastHourConvert(next6hoursData));
   };
@@ -77,8 +86,15 @@ const renderModule = (() => {
     const { changeBackgroundImage } = backgroundModule;
 
     const {
-      name, tempC, localtime, text, cloud, humidity,
-      wind, precip, code: weatherCode,
+      name,
+      tempC,
+      localtime,
+      text,
+      cloud,
+      humidity,
+      wind,
+      precip,
+      code: weatherCode,
     } = currentData;
 
     changeBackgroundImage(weatherCode);
@@ -86,7 +102,10 @@ const renderModule = (() => {
 
     displayLocalisation.textContent = name;
     displayTemp.innerHTML = `${tempC}&#176`;
-    displayLocalTime.textContent = `${format(new Date(localtime), 'EEEE h:mm aa')}`;
+    displayLocalTime.textContent = `${format(
+      new Date(localtime),
+      'EEEE h:mm aa'
+    )}`;
     displayWeatherResume.textContent = text;
     displayCloudly.innerHTML = `${cloud}%`;
     displayHumidity.innerHTML = `${humidity}%`;
