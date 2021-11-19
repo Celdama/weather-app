@@ -10,22 +10,28 @@ const backgroundModule = (() => {
   const rainCode = [1063, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1240, 1246];
   const snowCode = [1066, 1069, 1072, 1144, 1117, 1213, 1225, 1222, 1219];
 
+  const setBackgroundUrl = (targets, imgUrl) => {
+    targets.forEach((target) => {
+      const targetBg = target;
+      targetBg.style.backgroundImage = `url('${imgUrl}')`;
+    });
+  };
+
   const changeBackgroundImage = (codeWeatherCondition) => {
+    const {
+      sunny, cloudy, rainy, snow, basic,
+    } = images;
+
     if (sunnyCode.includes(codeWeatherCondition)) {
-      app.style.backgroundImage = `url('${images.sunny}')`;
-      main.style.backgroundImage = `url('${images.sunny}')`;
+      setBackgroundUrl([app, main], sunny);
     } else if (cloudCode.includes(codeWeatherCondition)) {
-      app.style.backgroundImage = `url('${images.cloudy}')`;
-      main.style.backgroundImage = `url('${images.cloudy}')`;
+      setBackgroundUrl([app, main], cloudy);
     } else if (rainCode.includes(codeWeatherCondition)) {
-      app.style.backgroundImage = `url('${images.rainy}')`;
-      main.style.backgroundImage = `url('${images.rainy}')`;
+      setBackgroundUrl([app, main], rainy);
     } else if (snowCode.includes(codeWeatherCondition)) {
-      app.style.backgroundImage = `url('${images.snow}')`;
-      main.style.backgroundImage = `url('${images.snow}')`;
+      setBackgroundUrl([app, main], snow);
     } else {
-      app.style.backgroundImage = `url('${images.default}')`;
-      main.style.backgroundImage = `url('${images.default}')`;
+      setBackgroundUrl([app, main], basic);
     }
   };
 
