@@ -67,7 +67,7 @@ const renderModule = (() => {
   const renderWeatherData = (currentData) => {
     const {
       name, tempC, localtime, text, cloud, humidity,
-      wind, precip, code,
+      wind, precip, code: weatherCode,
     } = currentData;
 
     displayLocalisation.textContent = name;
@@ -80,7 +80,7 @@ const renderModule = (() => {
     displayRain.innerHTML = `${precip}mm`;
 
     return {
-      code,
+      weatherCode,
       localtime,
     };
   };
