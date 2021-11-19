@@ -2,26 +2,22 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-top: 28px;
+  align-items: center;
+  align-self: center;
+  padding-top: 2em;
   height: 90%;
+  width: 95%;
+  font-size: $font-size-sm;
 
   .wrapper-forecast-temp {
     width: 105%;
     align-self: center;
 
-    #current {
-      opacity: 1;
-    }
-
     .current-temp {
-      color: black;
-      background-color: white;
-      padding: 3px;
-      border-radius: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
+      color: $color-black-default;
+      background-color: $color-white-default;
+      padding: .3em;
+      border-radius: $border-radius-lg;
     }
 
     ul {
@@ -32,34 +28,32 @@
   }
 
   .forecast-visu {
-    width: 98%;
-    align-self: center;
-    flex: 1;
     display: flex;
     justify-content: space-between;
-
     align-items: center;
+    align-self: center;
+    width: 96%;
+    flex: 1;
 
-    .vl {
+    .wick {
       position: relative;
       height: 90%;
       width: 1px;
-      background-color: rgba(185, 185, 185, 0.4);
+      background-color: $color-search-bar;
 
       .prev,
       .current {
-        background-color: white;
-        width: 4px;
         position: absolute;
         left: -1px;
         bottom: 0;
-        border-radius: 3px;
+        background-color: $color-white-default;
+        width: 4px;
+        border-radius: $border-radius-xs;
       }
     }
   }
 
   .wrapper-forecast-hour {
-    font-size: 16px;
     width: 105%;
     .none {
       display: none;
@@ -68,7 +62,6 @@
 
   ul {
     display: flex;
-    list-style: none;
     justify-content: space-between;
   }
 

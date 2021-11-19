@@ -1,22 +1,29 @@
 .right {
-  position: relative;
-  padding: 30px 40px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: rgba(0, 0, 0, 0.7);
+  position: relative;
+  padding: 3em 4em;
+  background: $color-black-default;
+  opacity: $opacity-md;
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(2px);
 
   .top {
     display: flex;
     flex-direction: column;
-    height: 55%;
-    border-bottom: 1px solid white;
+    font-size: $font-size-sm;
+    flex: 1;
+    border-bottom: 1px solid $color-white-default;
   }
 
   .bottom {
-    height: 45%;
-    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 2em;
+
+    .title-section {
+      font-size: $font-size-md;
+    }
   }
 }
