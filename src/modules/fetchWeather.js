@@ -12,10 +12,8 @@ const fetchModule = (() => {
       humidity,
       wind_kph: wind,
       precip_mm: precip,
-      temp_c,
+      temp_c: tempC,
     } = current;
-
-    // console.log(current);
 
     const currentData = {
       name,
@@ -25,11 +23,9 @@ const fetchModule = (() => {
       humidity,
       wind,
       precip,
-      tempC: temp_c,
+      tempC,
       code,
     };
-
-    // console.log(currentData);
 
     const forecastData = hour;
 
